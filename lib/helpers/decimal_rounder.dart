@@ -4,11 +4,11 @@ class DecimalRounder {
   static String removePriceDecimals(price) {
     String finalPrice;
     if (price! < 1) {
-      finalPrice = price.toStringAsFixed(6);
-    } else if (price < 10) {
       finalPrice = price.toStringAsFixed(5);
-    } else if (price < 100) {
+    } else if (price < 10) {
       finalPrice = price.toStringAsFixed(4);
+    } else if (price < 100) {
+      finalPrice = price.toStringAsFixed(3);
     } else {
       finalPrice = price.toStringAsFixed(2);
     }
@@ -31,7 +31,7 @@ class DecimalRounder {
 
   static String removePercentDecimals(percent24) {
     String percentChange;
-    if (percent24! > 10000) {
+    if (percent24! > 1000) {
       percentChange = percent24.toStringAsFixed(0);
     } else {
       percentChange = percent24.toStringAsFixed(2);

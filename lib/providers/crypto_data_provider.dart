@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_crypto/data/data_source/api_provider.dart';
-import 'package:flutter_application_crypto/data/data_source/response_model.dart';
-import 'package:flutter_application_crypto/data/models/CryptoModel/AllCryptoModel.dart';
+import '../data/data_source/api_provider.dart';
+import '../data/data_source/response_model.dart';
+import '../data/models/CryptoModel/AllCryptoModel.dart';
 
 class CryptoDataProvider extends ChangeNotifier {
   ApiProvider apiProvider = ApiProvider();

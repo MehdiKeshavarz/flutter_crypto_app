@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,6 +20,8 @@ class MarketViewPage extends StatefulWidget {
 }
 
 class _MarketViewPageState extends State<MarketViewPage> {
+  late Timer timer;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -25,6 +29,15 @@ class _MarketViewPageState extends State<MarketViewPage> {
     final cryptoMarketViewProvider =
         Provider.of<MarketViewProvider>(context, listen: false);
     cryptoMarketViewProvider.getAllCryptoData();
+
+    timer = Timer.periodic(const Duration(seconds: 20),
+        (timer) => cryptoMarketViewProvider.getAllCryptoData());
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override

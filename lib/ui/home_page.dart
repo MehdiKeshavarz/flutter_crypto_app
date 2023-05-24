@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    final cryptoDataProvider = Provider.of<CryptoDataProvider>(context, listen: false);
+    final cryptoDataProvider =
+        Provider.of<CryptoDataProvider>(context, listen: false);
     cryptoDataProvider.getTopMarketCapData();
   }
 
@@ -304,19 +305,38 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       case Status.COMPLETED:
-                        List<CryptoData>? cryptoModel = cryptoDataProvider.dataFuture.data!.cryptoCurrencyList;
+                        List<CryptoData>? cryptoModel = cryptoDataProvider
+                            .dataFuture.data!.cryptoCurrencyList;
                         return ListView.separated(
                             itemBuilder: (context, index) {
                               var number = index + 1;
                               var tokenId = cryptoModel![index].id;
-                              MaterialColor filterColor = DecimalRounder.setColorFilter(cryptoModel[index].quotes![0].percentChange30d);
-                              var finalPrice = DecimalRounder.removePriceDecimals(cryptoModel[index].quotes![0].price);
+                              MaterialColor filterColor =
+                                  DecimalRounder.setColorFilter(
+                                      cryptoModel[index]
+                                          .quotes![0]
+                                          .percentChange30d);
+                              var finalPrice =
+                                  DecimalRounder.removePriceDecimals(
+                                      cryptoModel[index].quotes![0].price);
                               // percent change setup decimals and colors
-                              var percentChange = DecimalRounder.removePercentDecimals(cryptoModel[index].quotes![0].percentChange24h);
-                              Color percentColor = DecimalRounder.setPercentChangesColor(cryptoModel[index].quotes![0].percentChange24h);
-                              Icon percentIcon = DecimalRounder.setPercentChangesIcon(cryptoModel[index].quotes![0].percentChange24h);
-                              var name  = cryptoModel[index].name!;
-                              var symbol =cryptoModel[index].symbol!;
+                              var percentChange =
+                                  DecimalRounder.removePercentDecimals(
+                                      cryptoModel[index]
+                                          .quotes![0]
+                                          .percentChange24h);
+                              Color percentColor =
+                                  DecimalRounder.setPercentChangesColor(
+                                      cryptoModel[index]
+                                          .quotes![0]
+                                          .percentChange24h);
+                              Icon percentIcon =
+                                  DecimalRounder.setPercentChangesIcon(
+                                      cryptoModel[index]
+                                          .quotes![0]
+                                          .percentChange24h);
+                              var name = cryptoModel[index].name!;
+                              var symbol = cryptoModel[index].symbol!;
                               return SizedBox(
                                 height: height * 0.075,
                                 child: Row(
@@ -353,8 +373,16 @@ class _HomePageState extends State<HomePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(name.length > 10 ? '${name.substring(0, 8)}...' : name, style: textTheme.bodySmall),
-                                          Text(symbol.length > 10 ? '${symbol.substring(0, 8)}...' : symbol, style: textTheme.bodySmall),
+                                          Text(
+                                              name.length > 10
+                                                  ? '${name.substring(0, 8)}...'
+                                                  : name,
+                                              style: textTheme.bodySmall),
+                                          Text(
+                                              symbol.length > 10
+                                                  ? '${symbol.substring(0, 8)}...'
+                                                  : symbol,
+                                              style: textTheme.bodySmall),
                                         ],
                                       ),
                                     ),
@@ -367,8 +395,8 @@ class _HomePageState extends State<HomePage> {
                                     )),
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 10.0),
+                                        padding:
+                                            const EdgeInsets.only(right: 10.0),
                                         child: Column(
                                           children: [
                                             Text('\$$finalPrice',
@@ -378,7 +406,9 @@ class _HomePageState extends State<HomePage> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 percentIcon,
-                                                Text("$percentChange%",
+                                                Text(
+                                                    "$percentChange%"
+                                                        .substring(0, 5),
                                                     style: GoogleFonts.ubuntu(
                                                         color: percentColor,
                                                         fontSize: 15))
